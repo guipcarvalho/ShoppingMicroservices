@@ -7,7 +7,7 @@ namespace Catalog.API.Repositories
     public interface IProductRepository
     {
         Task<IEnumerable<Product>> GetProductsAsync(CancellationToken cancellationToken);
-        Task<Product> GetProductByIdAsync(string id, CancellationToken cancellationToken);
+        Task<Product?> GetProductByIdAsync(string id, CancellationToken cancellationToken);
         Task<IEnumerable<Product>> GetProductByNameAsync(string name, CancellationToken cancellationToken);
         Task<IEnumerable<Product>> GetProductByCategoryAsync(string categoryName, CancellationToken cancellationToken);
         Task CreateProductAsync(Product product, CancellationToken cancellationToken);

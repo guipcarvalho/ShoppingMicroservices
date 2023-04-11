@@ -21,7 +21,7 @@ public class ProductRepository : IProductRepository
             .ToListAsync(cancellationToken);
     }
 
-    public Task<Product> GetProductByIdAsync(string id, CancellationToken cancellationToken)
+    public Task<Product?> GetProductByIdAsync(string id, CancellationToken cancellationToken)
     {
         return _context
             .Products
