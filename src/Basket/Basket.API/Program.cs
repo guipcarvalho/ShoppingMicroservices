@@ -1,11 +1,33 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddStackExchangeRedisCache(opt =>
+{
+    var configPath = "CacheSettings:ConnectionString";
+    opt.Configuration = builder.Configuration.GetValue<string>(configPath) ?? throw new ArgumentNullException(configPath);
+});
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Basket API",
+        Description = "A Microservice to manage user baskets",
+        Contact = new OpenApiContact
+        {
+            Name = "Guilherme Carvalho",
+            Url = new Uri("https://github.com/guipcarvalho")
+        }
+    });
+
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+});
 
 var app = builder.Build();
 
