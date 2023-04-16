@@ -24,6 +24,7 @@ namespace Basket.API.Controllers
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="cancellationToken"></param>
+        /// <remarks>userName example: swn</remarks>
         /// <returns></returns>
         [HttpGet("{userName}", Name = "GetBasket")]
         [ProducesResponseType(typeof(ShoppingCart), StatusCodes.Status200OK)]
@@ -38,7 +39,28 @@ namespace Basket.API.Controllers
         /// </summary>
         /// <param name="basket"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Payload example:
+        /// {
+        ///      "UserName": "swn",
+        ///      "Items": [
+        ///        {
+        ///          "Quantity": 2,
+        ///          "Color": "Red",
+        ///          "Price": 500,
+        ///          "ProductId": "60210c2a1556459e153f0554",
+        ///          "ProductName": "IPhone X"
+        ///        },
+        ///        {
+        ///          "Quantity": 1,
+        ///          "Color": "Blue",
+        ///          "Price": 500,
+        ///          "ProductId": "60210c2a1556459e153f0555",
+        ///          "ProductName": "Samsung 10"
+        ///        }
+        ///      ]  
+        ///   }
+        /// </remarks>
         [HttpPost]
         [ProducesResponseType(typeof(ShoppingCart), StatusCodes.Status200OK)]
         public async Task<ActionResult<ShoppingCart>> UpdateBasket([FromBody] ShoppingCart basket, CancellationToken cancellationToken)
@@ -52,7 +74,7 @@ namespace Basket.API.Controllers
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        ///<remarks>userName example: swn</remarks>
         [HttpDelete("{userName}", Name = "DeleteBasket")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         public async Task<IActionResult> DeleteBasket(string userName, CancellationToken cancellationToken)

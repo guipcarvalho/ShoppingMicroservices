@@ -4,9 +4,9 @@ public record ShoppingCart
 {
 	public string? UserName { get; set; }
 
-	public IList<ShoppingCartItem> ShoppingCartItems { get; set; } = new List<ShoppingCartItem>();
+	public IList<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
 
-	public decimal TotalPrice => ShoppingCartItems.Sum(x => x.Quantity * x.Price);
+	public decimal TotalPrice => Items.Sum(x => x.Quantity * x.Price);
 
 	public ShoppingCart() { }
 
