@@ -4,6 +4,9 @@ services:
   portainer:
     image: portainer/portainer-ce
 
+  pgadmin:
+    image: dpage/pgadmin4
+
   catalog.db:
     image: mongo
 
@@ -22,6 +25,11 @@ services:
       context: .
       dockerfile: Basket/Basket.API/Dockerfile
 
+  discount.db:
+    image: postgres
+
 volumes:
   mongo_data:
   portainer_data:
+  postgres_data:
+  pgadmin_data:
