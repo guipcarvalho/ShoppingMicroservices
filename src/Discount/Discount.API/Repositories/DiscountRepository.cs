@@ -5,7 +5,7 @@ using Npgsql;
 
 namespace Discount.API.Repositories
 {
-	public sealed class DiscountRepository : IDiscountRepository, IAsyncDisposable
+	public sealed class DiscountRepository : IDiscountRepository
 	{
         private readonly NpgsqlConnection _connection;
 
