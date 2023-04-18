@@ -20,7 +20,7 @@ namespace Discount.API.Controllers
         /// </summary>
         /// <param name="productName"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <remarks>Product example: IPhone X</remarks>
 		[HttpGet("{productName}", Name = "GetDiscount")]
 		[ProducesResponseType(typeof(Coupon), StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -32,14 +32,19 @@ namespace Discount.API.Controllers
 				return Ok(coupon);
 
 			return NotFound();
-		}
+        }
 
         /// <summary>
         /// Create a product discount
         /// </summary>
         /// <param name="coupon"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <remarks>{  
+	    ///      "productName": "Huawei Plus",
+	    ///      "description": "test new product",
+	    ///      "amount": 550
+        ///        }
+        ///</remarks>
         [HttpPost]
         [ProducesResponseType(typeof(Coupon), StatusCodes.Status201Created)]
         public async Task<ActionResult<Coupon>> CreateDiscount([FromBody] Coupon coupon, CancellationToken cancellationToken)
@@ -54,12 +59,18 @@ namespace Discount.API.Controllers
         /// </summary>
         /// <param name="coupon"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <remarks>{"id":3,"productName":"Huawei Plus","description":"test new product","amount":400}</remarks>
         [HttpPut]
         [ProducesResponseType(typeof(Coupon), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Coupon>> UpdateDiscount([FromBody] Coupon coupon, CancellationToken cancellationToken)
         {
-            return Ok(await _repository.UpdateDiscountAsync(coupon, cancellationToken));
+            var updateResult = await _repository.UpdateDiscountAsync(coupon, cancellationToken);
+
+            if(updateResult)
+                return Ok(coupon);
+
+            return BadRequest();
         }
 
         /// <summary>

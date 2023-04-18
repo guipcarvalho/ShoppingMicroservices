@@ -31,6 +31,10 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddFluentMigratorCore()
     .ConfigureRunner(rb => rb
         .AddPostgres()
+        .ConfigureGlobalProcessorOptions(opt =>
+        {
+            opt.ProviderSwitches = "Force Quote=false";
+        })
         .WithGlobalConnectionString(builder.Configuration.GetValue<string>("DatabaseSettings:ConnectionString"))
         .ScanIn(typeof(Program).Assembly).For.Migrations())
     .AddLogging(lb => lb.AddFluentMigratorConsole());

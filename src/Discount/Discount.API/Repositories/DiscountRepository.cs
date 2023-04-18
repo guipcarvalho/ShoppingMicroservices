@@ -27,7 +27,7 @@ namespace Discount.API.Repositories
 
         public async Task<bool> DeleteDiscountAsync(string productName, CancellationToken cancellationToken)
         {
-            CommandDefinition commandDefinition = new("DELETE Coupon WHERE ProductName = @ProductName",
+            CommandDefinition commandDefinition = new("DELETE FROM Coupon WHERE ProductName = @ProductName",
                                             new { ProductName = productName }, cancellationToken: cancellationToken);
 
             var affected = await _connection.ExecuteAsync(commandDefinition);
