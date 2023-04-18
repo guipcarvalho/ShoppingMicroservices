@@ -101,9 +101,9 @@ namespace Catalog.API.Controllers
         }
 
         /// <summary>
-        /// Delete profuct with the given id
+        /// Delete product with the given id
         /// </summary>
-        /// <param name="product"></param>
+        /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpDelete("{id:length(24)}")]
