@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Basket.API.Entities;
+using Basket.API.GrpcServices;
 using Basket.API.Repositories;
+using Grpc.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Controllers
@@ -13,10 +15,12 @@ namespace Basket.API.Controllers
     public class BasketsController : ControllerBase
     {
         private readonly IBasketRepository _repository;
+        private readonly DiscountGrpcService _discountGrpcService;
 
-        public BasketsController(IBasketRepository repository)
+        public BasketsController(IBasketRepository repository, DiscountGrpcService discountGrpcService)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _discountGrpcService = discountGrpcService ?? throw new ArgumentNullException(nameof(discountGrpcService));
         }
 
         /// <summary>
@@ -65,6 +69,16 @@ namespace Basket.API.Controllers
         [ProducesResponseType(typeof(ShoppingCart), StatusCodes.Status200OK)]
         public async Task<ActionResult<ShoppingCart>> UpdateBasket([FromBody] ShoppingCart basket, CancellationToken cancellationToken)
         {
+            foreach (var item in basket.Items)
+            {
+                try
+                {
+                    var coupon = await _discountGrpcService.GetDiscountAsync(item.ProductName, cancellationToken);
+                    item.Price -= coupon.Amount;
+                }
+                catch (RpcException ex) when (ex.StatusCode == Grpc.Core.StatusCode.NotFound) { } //No work should be done if there is not a coupon for the product
+            }
+
             return Ok(await _repository.UpdateBasketAsync(basket, cancellationToken));
         }
 

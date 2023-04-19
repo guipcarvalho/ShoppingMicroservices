@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn);1591</NoWarn>
 	<DockerComposeProjectPath>../../docker-compose.dcproj</DockerComposeProjectPath>
 	<UserSecretsId>1cfa15cf-a07e-4bae-a929-16b3869467f3</UserSecretsId>
   </PropertyGroup>
