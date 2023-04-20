@@ -2,15 +2,16 @@
   "profiles": {
     "http": {
       "commandName": "Project",
+      "applicationUrl": "http://localhost:5236",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5236",
       "dotnetRunMessages": true
     },
     "Docker": {
       "commandName": "Docker",
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {},
       "publishAllPorts": true
     }
   }
