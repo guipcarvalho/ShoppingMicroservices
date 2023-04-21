@@ -94,7 +94,7 @@ namespace Catalog.API.Controllers
         {
             var changed = await _repository.UpdateProductAsync(product, cancellationToken);
 
-            if(changed)
+            if (changed)
                 return Ok(product);
 
             return NotFound();

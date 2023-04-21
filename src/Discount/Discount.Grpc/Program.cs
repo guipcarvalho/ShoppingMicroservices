@@ -1,7 +1,6 @@
 ﻿using Discount.Grpc.Repositories;
 using Discount.Grpc.Services;
 using FluentMigrator.Runner;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 

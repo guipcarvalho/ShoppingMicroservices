@@ -1,15 +1,15 @@
-﻿using System.Text.Json;
-using Basket.API.Entities;
+﻿using Basket.API.Entities;
 using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 
 namespace Basket.API.Repositories
 {
-	public class BasketRepository : IBasketRepository
-	{
+    public class BasketRepository : IBasketRepository
+    {
         private readonly IDistributedCache _cache;
 
         public BasketRepository(IDistributedCache cache)
-		{
+        {
             _cache = cache ?? throw new ArgumentNullException(nameof(cache));
         }
 

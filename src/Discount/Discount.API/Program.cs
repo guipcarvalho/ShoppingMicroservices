@@ -1,7 +1,7 @@
-﻿using Microsoft.OpenApi.Models;
-using System.Reflection;
-using Discount.API.Repositories;
+﻿using Discount.API.Repositories;
 using FluentMigrator.Runner;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,7 +38,7 @@ builder.Services.AddFluentMigratorCore()
         .WithGlobalConnectionString(builder.Configuration.GetValue<string>("DatabaseSettings:ConnectionString"))
         .ScanIn(typeof(Program).Assembly).For.Migrations())
     .AddLogging(lb => lb.AddFluentMigratorConsole());
-    
+
 
 var app = builder.Build();
 

@@ -1,8 +1,8 @@
-﻿using Basket.API.Repositories;
+﻿using Basket.API.GrpcServices;
+using Basket.API.Repositories;
+using Discount.Grpc.Protos;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using Basket.API.GrpcServices;
-using Discount.Grpc.Protos;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace Discount.API.Controllers
 {
     [ApiController]
-	[Route("api/v1/discounts")]
-	public class DiscountsController : ControllerBase
-	{
+    [Route("api/v1/discounts")]
+    public class DiscountsController : ControllerBase
+    {
         private readonly IDiscountRepository _repository;
 
         public DiscountsController(IDiscountRepository repository)
-		{
-			_repository = repository ?? throw new ArgumentNullException(nameof(repository));
-		}
+        {
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        }
 
         /// <summary>
         /// Get a product discount
@@ -22,16 +22,16 @@ namespace Discount.API.Controllers
         /// <param name="cancellationToken"></param>
         /// <remarks>Product example: IPhone X</remarks>
 		[HttpGet("{productName}", Name = "GetDiscount")]
-		[ProducesResponseType(typeof(Coupon), StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Coupon), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Coupon>> GetDiscount(string productName, CancellationToken cancellationToken)
-		{
-			var coupon = await _repository.GetDiscountAsync(productName, cancellationToken);
+        {
+            var coupon = await _repository.GetDiscountAsync(productName, cancellationToken);
 
-			if(coupon is not null)
-				return Ok(coupon);
+            if (coupon is not null)
+                return Ok(coupon);
 
-			return NotFound();
+            return NotFound();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Discount.API.Controllers
         {
             var updateResult = await _repository.UpdateDiscountAsync(coupon, cancellationToken);
 
-            if(updateResult)
+            if (updateResult)
                 return Ok(coupon);
 
             return BadRequest();

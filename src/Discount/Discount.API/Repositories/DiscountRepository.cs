@@ -1,19 +1,18 @@
-﻿using System;
-using Dapper;
+﻿using Dapper;
 using Discount.API.Entities;
 using Npgsql;
 
 namespace Discount.API.Repositories
 {
-	public sealed class DiscountRepository : IDiscountRepository
-	{
+    public sealed class DiscountRepository : IDiscountRepository
+    {
         private readonly NpgsqlConnection _connection;
 
         public DiscountRepository(IConfiguration configuration)
-		{
+        {
             var connectionString = configuration.GetValue<string?>("DatabaseSettings:ConnectionString") ?? throw new ArgumentNullException(nameof(configuration));
             _connection = new NpgsqlConnection(connectionString);
-		}
+        }
 
         public async Task<bool> CreateDiscountAsync(Coupon coupon, CancellationToken cancellationToken)
         {

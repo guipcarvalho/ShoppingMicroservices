@@ -1,6 +1,4 @@
-﻿using MongoDB.Driver;
-
-namespace Catalog.API.Config
+﻿namespace Catalog.API.Config
 {
     public record DatabaseSettings
     {

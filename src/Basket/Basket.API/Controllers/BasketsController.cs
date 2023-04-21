@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Basket.API.Entities;
+﻿using Basket.API.Entities;
 using Basket.API.GrpcServices;
 using Basket.API.Repositories;
 using Grpc.Core;

@@ -1,6 +1,5 @@
 ﻿using Catalog.API.Data;
 using Catalog.API.Repositories;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
