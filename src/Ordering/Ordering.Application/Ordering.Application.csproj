@@ -13,10 +13,24 @@
   <ItemGroup>
     <Folder Include="Features\" />
     <Folder Include="Behaviours\" />
+    <Folder Include="Features\Orders\" />
+    <Folder Include="Features\Orders\Commands\" />
+    <Folder Include="Features\Orders\Queries\" />
+    <Folder Include="Features\Orders\Queries\GetOrdersList\" />
+    <Folder Include="Features\Orders\Commands\CheckoutOrder\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Features\Orders\" />
+    <None Remove="Features\Orders\Commands\" />
+    <None Remove="Features\Orders\Queries\" />
+    <None Remove="Features\Orders\Queries\GetOrdersList\" />
+    <None Remove="Features\Orders\Commands\CheckoutOrder\" />
+  </ItemGroup>
 </Project>

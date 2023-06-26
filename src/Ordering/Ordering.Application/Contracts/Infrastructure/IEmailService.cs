@@ -4,6 +4,6 @@ namespace Ordering.Application.Contracts.Infrastructure
 {
     public interface IEmailService
     {
-        Task<bool> SendEmailAsync(Email email);
+        Task<bool> SendEmailAsync(Email email, CancellationToken cancellationToken = default);
     }
 }
