@@ -19,6 +19,7 @@
     <Folder Include="Features\Orders\Queries\GetOrdersList\" />
     <Folder Include="Features\Orders\Commands\CheckoutOrder\" />
     <Folder Include="Features\Orders\Commands\UpdateOrder\" />
+    <Folder Include="Features\Orders\Commands\DeleteOrder\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,5 +36,6 @@
     <None Remove="Features\Orders\Queries\GetOrdersList\" />
     <None Remove="Features\Orders\Commands\CheckoutOrder\" />
     <None Remove="Features\Orders\Commands\UpdateOrder\" />
+    <None Remove="Features\Orders\Commands\DeleteOrder\" />
   </ItemGroup>
 </Project>

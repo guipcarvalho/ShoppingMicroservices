@@ -30,6 +30,12 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
             }
 
             _mapper.Map(request, orderToUpdate);
+
+            await _repository.UpdateAsync(orderToUpdate);
+
+            _logger.LogInformation("Order {orderId} is successfully updated.", orderToUpdate.Id);
+
+            return Unit.Value;
         }
     }
 }
