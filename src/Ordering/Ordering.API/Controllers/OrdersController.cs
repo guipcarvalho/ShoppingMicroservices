@@ -26,8 +26,8 @@ namespace Ordering.API.Controllers
         }
 
         [HttpGet("{userName}", Name = "GetOrder")]
-        [ProducesResponseType(typeof(IEnumerable<OrderVm>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<OrdersVm>>> GetOrdersByUserName(string userName)
+        [ProducesResponseType(typeof(IEnumerable<OrderViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<OrderViewModel>>> GetOrdersByUserName(string userName)
         {
             var query = new GetOrdersListQuery(userName);
             var orders = await _mediator.Send(query);
