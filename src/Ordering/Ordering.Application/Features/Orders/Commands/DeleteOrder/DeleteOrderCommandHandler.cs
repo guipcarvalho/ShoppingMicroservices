@@ -22,7 +22,6 @@ namespace Ordering.Application.Features.Orders.Commands.DeleteOrder
         public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
         {
             await _orderRepository.DeleteAsync(request.Id, cancellationToken);
-
             return Unit.Value;
         }
     }
