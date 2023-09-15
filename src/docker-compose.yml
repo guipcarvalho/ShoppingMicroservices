@@ -39,6 +39,9 @@ services:
     build:
       context: .
       dockerfile: Discount/Discount.Grpc/Dockerfile
+      
+  order.db:
+    image: mcr.microsoft.com/azure-sql-edge
 
 volumes:
   mongo_data:
