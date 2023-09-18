@@ -21,6 +21,15 @@ services:
       - "5050:80"
     volumes:
       - pgadmin_data:/root/.pgadmin
+  
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
 
   catalog.db:
     container_name: catalog.db

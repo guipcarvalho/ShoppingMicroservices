@@ -6,6 +6,9 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
+    
+  rabbitmq:
+    image: rabbitmq:3.11.23-management-alpine
 
   catalog.db:
     image: mongo
@@ -53,4 +56,5 @@ volumes:
   portainer_data:
   postgres_data:
   pgadmin_data:
+  rabbitmq_data:
 
