@@ -98,3 +98,13 @@ services:
     restart: always
     ports:
       - "1433:1433"
+  
+  order.api:
+    container_name: order.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:OrderingConnectionString=Server=order.db;Initial Catalog=order.db;User Id=sa;Password=!sql123456;Encrypt=False"
+    ports:
+      - "8004:80"
+    depends_on:
+      - order.db

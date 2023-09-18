@@ -43,6 +43,11 @@ services:
   order.db:
     image: mcr.microsoft.com/azure-sql-edge
 
+  order.api:
+    image: ${DOCKER_REGISTRY-}order
+    build:
+      context: .
+      dockerfile: Ordering/Ordering.API/Dockerfile
 volumes:
   mongo_data:
   portainer_data:
