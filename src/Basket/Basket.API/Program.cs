@@ -28,6 +28,8 @@ builder.Services.AddMassTransit(opt => {
     });
 });
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();

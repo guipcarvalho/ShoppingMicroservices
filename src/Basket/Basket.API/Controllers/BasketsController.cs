@@ -1,7 +1,10 @@
-﻿using Basket.API.Entities;
+﻿using AutoMapper;
+using Basket.API.Entities;
 using Basket.API.GrpcServices;
 using Basket.API.Repositories;
+using EventBus.Messages.Events;
 using Grpc.Core;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Controllers
@@ -12,11 +15,16 @@ namespace Basket.API.Controllers
     {
         private readonly IBasketRepository _repository;
         private readonly DiscountGrpcService _discountGrpcService;
-
-        public BasketsController(IBasketRepository repository, DiscountGrpcService discountGrpcService)
+        private readonly IMapper _mapper;
+        private readonly IPublishEndpoint _publishEndpoint;
+        
+        public BasketsController(IBasketRepository repository, DiscountGrpcService discountGrpcService, IMapper mapper,
+            IPublishEndpoint publishEndpoint)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _discountGrpcService = discountGrpcService ?? throw new ArgumentNullException(nameof(discountGrpcService));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _publishEndpoint = publishEndpoint ?? throw new ArgumentNullException(nameof(publishEndpoint));
         }
 
         /// <summary>
@@ -90,6 +98,25 @@ namespace Basket.API.Controllers
         public async Task<IActionResult> DeleteBasket(string userName, CancellationToken cancellationToken)
         {
             await _repository.DeleteBasketAsync(userName, cancellationToken);
+            return Accepted();
+        }
+        
+        [HttpPost("[action]", Name = "Checkout")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout, CancellationToken cancellationToken)
+        {
+            if (basketCheckout?.UserName is null) return BadRequest();
+            
+            var basket = await _repository.GetBasketAsync(basketCheckout.UserName, cancellationToken);
+            if (basket is null) return BadRequest();
+            
+            var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
+            eventMessage.TotalPrice = basket.TotalPrice;
+            await _publishEndpoint.Publish(eventMessage, cancellationToken);
+            
+            await _repository.DeleteBasketAsync(basketCheckout.UserName, cancellationToken);
+            
             return Accepted();
         }
     }
