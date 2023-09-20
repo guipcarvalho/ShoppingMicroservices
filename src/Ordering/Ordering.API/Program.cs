@@ -32,6 +32,8 @@ builder.Services.AddMassTransit(opt =>
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<BasketCheckoutConsumer>();
 
 var app = builder.Build();
 

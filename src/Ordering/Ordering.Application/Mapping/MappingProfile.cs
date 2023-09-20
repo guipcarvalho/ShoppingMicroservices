@@ -13,6 +13,7 @@ namespace Ordering.Application.Mapping
             CreateMap<Order, OrderViewModel>().ReverseMap();
             CreateMap<Order, CheckoutOrderCommand>().ReverseMap();
             CreateMap<Order, UpdateOrderCommand>().ReverseMap();
+            
         }
     }
 }
