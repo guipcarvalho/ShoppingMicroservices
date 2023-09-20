@@ -8,6 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerComposeProjectPath>../../docker-compose.dcproj</DockerComposeProjectPath>
     <UserSecretsId>00dccbe9-58ff-461b-a309-b91c861709d4</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
@@ -38,5 +39,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BuildingBlocks\EventBus.Messages\EventBus.Messages.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
   </ItemGroup>
 </Project>
