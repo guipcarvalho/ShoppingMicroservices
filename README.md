@@ -17,6 +17,7 @@ Application created during the Microservices architecture course, with some enha
 * Redis
 * MongoDB
 * Docker
+* Ocelot
 
 ### Libraries
 * Entity Framework Core
