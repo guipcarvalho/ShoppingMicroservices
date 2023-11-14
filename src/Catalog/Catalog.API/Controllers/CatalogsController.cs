@@ -87,11 +87,12 @@ namespace Catalog.API.Controllers
         /// <param name="product"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut("{id:length(24)}")]
         [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateProduct([FromBody] Product product, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateProduct(string id, [FromBody] Product product, CancellationToken cancellationToken)
         {
+            product.Id = id;
             var changed = await _repository.UpdateProductAsync(product, cancellationToken);
 
             if (changed)

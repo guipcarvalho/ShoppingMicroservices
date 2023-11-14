@@ -7,7 +7,7 @@ public record Product
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public required string Id { get; init; }
+    public string? Id { get; set; }
 
     public required string Name { get; init; }
 
