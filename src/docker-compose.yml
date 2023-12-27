@@ -51,6 +51,13 @@ services:
     build:
       context: .
       dockerfile: Ordering/Ordering.API/Dockerfile
+      
+  api.gateway:
+    image: ${DOCKER_REGISTRY-}api.gateway
+    build:
+      context: .
+      dockerfile: ApiGateways/OcelotApiGateway/Dockerfile
+      
 volumes:
   mongo_data:
   portainer_data:

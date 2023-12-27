@@ -11,10 +11,17 @@
       <Content Include="..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Update="ocelot.Development.json">
+        <DependentUpon>ocelot.json</DependentUpon>
+      </Content>
+      <Content Update="ocelot.Local.json">
+        <DependentUpon>ocelot.json</DependentUpon>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Ocelot" Version="19.0.3" />
+      <PackageReference Include="Ocelot" Version="22.0.1" />
+      <PackageReference Include="Ocelot.Cache.CacheManager" Version="22.0.1" />
     </ItemGroup>
 
 </Project>

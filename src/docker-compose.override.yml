@@ -121,3 +121,15 @@ services:
     depends_on:
       - order.db
       - rabbitmq
+        
+  api.gateway:
+    container_name: api.gateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8010:80"
+    depends_on:
+      - order.api
+      - basket.api
+      - catalog.api
+      - discount.api
